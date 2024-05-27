@@ -16,7 +16,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return Contact::all();
+        $contacts = Contact::all();
+        return response()->json(['contacts' => $contacts], Response::HTTP_OK);
     }
 
     /**
@@ -39,7 +40,7 @@ class ContactController extends Controller
 
         $contact = Contact::create($validated);
 
-        return response()->json($contact, Response::HTTP_CREATED);
+        return response()->json(['contact' => $contact], Response::HTTP_CREATED);
     }
 
     /**
@@ -55,7 +56,7 @@ class ContactController extends Controller
             return response()->json(['error' => 'Contact not found'], Response::HTTP_NOT_FOUND);
         }
 
-        return response()->json($contact, Response::HTTP_OK);
+        return response()->json(['contact' => $contact], Response::HTTP_OK);
     }
 
     /**
@@ -84,7 +85,7 @@ class ContactController extends Controller
 
         $contact->update($validated);
 
-        return response()->json($contact, Response::HTTP_OK);
+        return response()->json(['contact' => $contact], Response::HTTP_OK);
     }
 
     /**
